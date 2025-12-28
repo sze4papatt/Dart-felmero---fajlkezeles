@@ -35,7 +35,6 @@ Future<void> deleteFile(String fileName) async {
 }
 
 /// 3. feladat – fájl beolvasása
-/// Itt List<String>-et adunk vissza, soronként a tartalommal.
 Future<List<String>> readFile(String fileName) async {
   final file = File(fileName);
   try {
@@ -53,9 +52,6 @@ Future<List<String>> readFile(String fileName) async {
 }
 
 /// 3. feladat – tartalom kiírása
-/// Feltételezés: az employees.txt sorai így néznek ki:
-/// Név;Kor;Nem
-/// ahol a "Nem" vagy "nő" vagy "férfi" (kis-nagybetűtől függetlenül).
 void printContent(List<String> content) {
   if (content.isEmpty) {
     print('Nincs megjeleníthető adat.');
@@ -64,7 +60,7 @@ void printContent(List<String> content) {
 
   final women = <String>[];
   final men = <String>[];
-  final others = <String>[]; // ha esetleg nem egyértelmű a nem
+  final others = <String>[]; 
 
   for (final line in content) {
     final parts = line.split(';');
@@ -102,12 +98,10 @@ void printContent(List<String> content) {
 }
 
 /// 4. feladat – számok hozzáadása a numbers.txt-hez
-/// Az új számok egy ÚJ SORBA kerüljenek.
 Future<void> addNumbers(String fileName, List<int> numbers) async {
   final file = File(fileName);
   try {
     final sink = file.openWrite(mode: FileMode.append);
-    // Új sor, benne a számok szóközzel elválasztva:
     sink.writeln(numbers.join(' '));
     await sink.close();
     print('Számok hozzáadva a(z) $fileName fájlhoz.');
@@ -117,8 +111,6 @@ Future<void> addNumbers(String fileName, List<int> numbers) async {
 }
 
 /// 4. feladat – számok kiíratása növekvő sorrendben
-/// Paraméter: a numbers.txt fájl tartalma, soronként.
-/// A sorokban lehet több szám is, szóközzel elválasztva.
 void printNumbers(List<String> fileContent) {
   final allNumbers = <int>[];
 
@@ -147,11 +139,11 @@ void printNumbers(List<String> fileContent) {
 }
 
 Future<void> main() async {
-  // 1. feladat – createFile
+  // 1. feladat – fájl létrehozása
   await createFile('players.txt');
   await createFile('cars.txt');
 
-  // 2. feladat – deleteFile
+  // 2. feladat – fájl törlése
   await deleteFile('players.txt');
 
   // 3. feladat – employees.txt kezelése
